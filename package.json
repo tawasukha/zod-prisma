@@ -1,0 +1,80 @@
+{
+	"name": "@tawasukha/zod-prisma",
+	"version": "0.5.9",
+	"description": "Forked Version Prisma generator that creates Zod schemas for all of your models",
+	"license": "MIT",
+	"contributors": [
+		"Carter Grimmeisen",
+		"Forte Zhuo"
+	],
+	"homepage": "https://github.com/tawasukha/zod-prisma#readme",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/tawasukha/zod-prisma.git"
+	},
+	"bugs": {
+		"url": "https://github.com/tawasukha/zod-prisma/issues"
+	},
+	"main": "dist/index.js",
+	"module": "dist/zod-prisma.esm.js",
+	"typings": "dist/index.d.ts",
+	"bin": {
+		"zod-prisma": "bin/cli.js"
+	},
+	"keywords": [
+		"zod",
+		"prisma",
+		"generator"
+	],
+	"files": [
+		"bin",
+		"dist"
+	],
+	"scripts": {
+		"build": "dts build --target node --format cjs --rollupTypes",
+		"lint": "tsc --noEmit && dts lint src --ignore-pattern src/test/functional",
+		"prepublish": "dts build --target node --format cjs --rollupTypes",
+		"start": "dts watch",
+		"test": "dts test --maxWorkers=4 --verbose"
+	},
+	"prettier": {
+		"printWidth": 100,
+		"semi": false,
+		"singleQuote": true,
+		"tabWidth": 4,
+		"trailingComma": "es5",
+		"useTabs": true
+	},
+	"eslintConfig": {
+		"rules": {
+			"react-hooks/rules-of-hooks": "off"
+		}
+	},
+	"jest": {
+		"testEnvironment": "node"
+	},
+	"dependencies": {
+		"@prisma/generator-helper": "^4.6.1",
+		"parenthesis": "^3.1.8",
+		"ts-morph": "^15.1.0"
+	},
+	"devDependencies": {
+		"@prisma/client": "^4.6.1",
+		"@prisma/internals": "^4.6.1",
+		"@tsconfig/recommended": "^1.0.1",
+		"@types/fs-extra": "^9.0.13",
+		"dts-cli": "^1.5.2",
+		"execa": "^5.1.0",
+		"fast-glob": "^3.2.11",
+		"fs-extra": "^10.1.0",
+		"husky": "^7.0.4",
+		"jest-mock-extended": "^2.0.7",
+		"prisma": "^4.6.1",
+		"tslib": "^2.4.0",
+		"typescript": "^4.5.5",
+		"zod": "^3.18.0"
+	},
+	"engines": {
+		"node": ">=16"
+	}
+}

@@ -1,0 +1,244 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "postgresql"
+  url      = env("PRISMA_DB_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator zod {
+  provider      = "../bin/cli.js"
+  output        = "./zod"
+}
+
+model user {
+  id        String    @id @default(uuid())
+  username  String    @unique
+  role      String[]
+  createdBy String?   @map("_createdBy")
+  createdAt DateTime  @default(now()) @map("_createdAt")
+  updatedBy String?   @map("_updatedBy")
+  updatedAt DateTime  @updatedAt @map("_updatedAt")
+  deletedAt DateTime? @map("_deletedAt")
+  authors   String[]  @default(["*"]) @map("_authors")
+  readers   String[]  @default(["*"]) @map("_readers")
+}
+
+model mail {
+  id        String    @id @default(uuid())
+  parameter String    @unique
+  status    String    @default("Active")
+  template  String?
+  createdBy String?   @map("_createdBy")
+  createdAt DateTime  @default(now()) @map("_createdAt")
+  updatedBy String?   @map("_updatedBy")
+  updatedAt DateTime  @updatedAt @map("_updatedAt")
+  deletedAt DateTime? @map("_deletedAt")
+  authors   String[]  @default(["*"]) @map("_authors")
+  readers   String[]  @default(["*"]) @map("_readers")
+}
+
+model workflow {
+  id        String    @id @default(uuid())
+  parameter String
+  status    String    @default("Active")
+  complete  String    @default("Approved")
+  maxFlow   Int       @default(0)
+  flow      Json[]
+  createdBy String?   @map("_createdBy")
+  createdAt DateTime  @default(now()) @map("_createdAt")
+  updatedBy String?   @map("_updatedBy")
+  updatedAt DateTime  @updatedAt @map("_updatedAt")
+  deletedAt DateTime? @map("_deletedAt")
+  authors   String[]  @default(["*"]) @map("_authors")
+  readers   String[]  @default(["*"]) @map("_readers")
+}
+
+model vendor_info {
+  id               String           @id @default(uuid())
+  vendorDocId      String           @default("")
+  vendorCode       String           @default("")
+  legalStatus      String
+  contractorName   String
+  buildingCode     String?
+  street1          String?
+  street2          String?
+  street3          String?
+  street4          String?
+  street5          String?
+  houseNumber      String?
+  postalCode       String?
+  city             String?
+  country          String?
+  telephone1       String?
+  telephone2       String?
+  email1           String?
+  email2           String?
+  fax1             String?
+  fax2             String?
+  contactPerson    String?
+  contactPhone     String?
+  financialClass   String?
+  classProvider    String?
+  codeCompetence1  String?
+  codeCompetence2  String?
+  codeCompetence3  String?
+  codeCompetence4  String?
+  codeCompetence5  String?
+  coreCompetence1  String?
+  coreCompetence2  String?
+  coreCompetence3  String?
+  coreCompetence4  String?
+  coreCompetence5  String?
+  aoaNumber        String?
+  aoaDate          DateTime?
+  aoaInfo          String?
+  amendAoaNumber   String?
+  amendAoaDate     DateTime?
+  amendAoaInfo     String?
+  bizLicNo1        String?
+  bizLicNo2        String?
+  bizLicNo3        String?
+  bizLicNo4        String?
+  bizLicNo5        String?
+  bizLicDate1      DateTime?
+  bizLicDate2      DateTime?
+  bizLicDate3      DateTime?
+  bizLicDate4      DateTime?
+  bizLicDate5      DateTime?
+  bizLicExpDate1   DateTime?
+  bizLicExpDate2   DateTime?
+  bizLicExpDate3   DateTime?
+  bizLicExpDate4   DateTime?
+  bizLicExpDate5   DateTime?
+  bizLicInfo1      String?
+  bizLicInfo2      String?
+  bizLicInfo3      String?
+  bizLicInfo4      String?
+  bizLicInfo5      String?
+  spdaNo1          String?
+  spdaNo2          String?
+  spdaNo3          String?
+  spdaNo4          String?
+  spdaNo5          String?
+  spdaDate1        DateTime?
+  spdaDate2        DateTime?
+  spdaDate3        DateTime?
+  spdaDate4        DateTime?
+  spdaDate5        DateTime?
+  spdaExpDate1     DateTime?
+  spdaExpDate2     DateTime?
+  spdaExpDate3     DateTime?
+  spdaExpDate4     DateTime?
+  spdaExpDate5     DateTime?
+  spdaInfo1        String?
+  spdaInfo2        String?
+  spdaInfo3        String?
+  spdaInfo4        String?
+  spdaInfo5        String?
+  sktNo1           String?
+  sktNo2           String?
+  sktNo3           String?
+  sktNo4           String?
+  sktNo5           String?
+  sktDate1         DateTime?
+  sktDate2         DateTime?
+  sktDate3         DateTime?
+  sktDate4         DateTime?
+  sktDate5         DateTime?
+  sktExpDate1      DateTime?
+  sktExpDate2      DateTime?
+  sktExpDate3      DateTime?
+  sktExpDate4      DateTime?
+  sktExpDate5      DateTime?
+  sktInfo1         String?
+  sktInfo2         String?
+  sktInfo3         String?
+  sktInfo4         String?
+  sktInfo5         String?
+  skdpNo           String?
+  skdpDate         DateTime?
+  skdpExpDate      DateTime?
+  skdpInfo         String?
+  vhseStatus       String?
+  vhseExpDate      String?
+  afflVendor       String?
+  afflExpDate      DateTime?
+  siujkExpDate     DateTime?
+  siupalDate       DateTime?
+  siupExpDate      DateTime?
+  tdpExpDate       DateTime?
+  bod              String?
+  npwp             String?
+  npwpDocument     String[]
+  r_vendorAccount  vendor_account?
+  r_vendorApproval vendor_approval?
+  createdBy        String?          @map("_createdBy")
+  createdAt        DateTime         @default(now()) @map("_createdAt")
+  updatedBy        String?          @map("_updatedBy")
+  updatedAt        DateTime         @updatedAt @map("_updatedAt")
+  deletedAt        DateTime?        @map("_deletedAt")
+  authors          String[]         @default(["*"]) @map("_authors")
+  readers          String[]         @default(["*"]) @map("_readers")
+}
+
+model vendor_approval {
+  id             String      @id @default(uuid())
+  registree      String
+  registerNumber  String?     @default("")
+  registerDate    DateTime    @default(now())
+  approver1      String[]
+  approver2      String[]
+  currentAuthors String[]
+  parameter      String
+  maxApproval    Int?        @default(0)
+  approval       Json[]
+  history        Json[]
+  docStatus      String      @default("0")
+  currentLevel   String      @default("0")
+  backLevel      String?     @default("")
+  status         String      @default("Draft")
+  r_vendorInfo   vendor_info @relation(fields: [r_vendorId], references: [id])
+  r_vendorId     String      @unique
+  createdBy      String?     @map("_createdBy")
+  createdAt      DateTime    @default(now()) @map("_createdAt")
+  updatedBy      String?     @map("_updatedBy")
+  updatedAt      DateTime    @updatedAt @map("_updatedAt")
+  deletedAt      DateTime?   @map("_deletedAt")
+  authors        String[]    @default(["*"]) @map("_authors")
+  readers        String[]    @default(["*"]) @map("_readers")
+}
+
+model vendor_account {
+  id               String      @id @default(uuid())
+  email            String      @unique
+  password         String      @default("null")
+  securityQuestion String
+  answerQuestion   String
+  r_vendorInfo     vendor_info @relation(fields: [r_vendorId], references: [id])
+  r_vendorId       String      @unique
+  createdBy        String?     @map("_createdBy")
+  createdAt        DateTime    @default(now()) @map("_createdAt")
+  updatedBy        String?     @map("_updatedBy")
+  updatedAt        DateTime    @updatedAt @map("_updatedAt")
+  deletedAt        DateTime?   @map("_deletedAt")
+  authors          String[]    @default(["*"]) @map("_authors")
+  readers          String[]    @default(["*"]) @map("_readers")
+}
+
+model category {
+  id        String    @id @default(uuid())
+  keyword   String
+  value     String[]
+  createdBy String?   @map("_createdBy")
+  createdAt DateTime  @default(now()) @map("_createdAt")
+  updatedBy String?   @map("_updatedBy")
+  updatedAt DateTime  @updatedAt @map("_updatedAt")
+  deletedAt DateTime? @map("_deletedAt")
+  authors   String[]  @default(["*"]) @map("_authors")
+  readers   String[]  @default(["*"]) @map("_readers")
+}
