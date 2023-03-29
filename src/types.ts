@@ -24,7 +24,7 @@ export const getZodConstructor = (
 				break
 			case 'DateTime':
 				zodType =
-					'z.preprocess((arg) => typeof arg == "string" || arg instanceof Date ? new Date(arg) : arg, z.date())'
+					'z.preprocess((arg) => typeof arg === "string" || arg instanceof Date ? new Date(arg) : arg, z.date())'
 				break
 			case 'Float':
 				zodType = 'z.number()'
@@ -58,7 +58,7 @@ export const getZodConstructor = (
 	}
 	if (!field.isRequired || field.isUpdatedAt || field.hasDefaultValue) {
 		extraModifiers.push('optional()')
-		if (!field.isId && !field.hasDefaultValue && !field.isList && !field.isUpdatedAt ) {
+		if (!field.isId && !field.hasDefaultValue && !field.isList && !field.isUpdatedAt) {
 			extraModifiers.push('nullable()')
 		}
 	}

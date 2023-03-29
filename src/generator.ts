@@ -130,7 +130,7 @@ export const generateRelatedSchemaForModel = (
 		declarations: [
 			{
 				name: relatedModelName(model.name),
-				type:"",
+				type: "",
 				initializer(writer) {
 					writer
 						.write(`z.lazy(() => ${modelName(model.name)}.extend(`)
