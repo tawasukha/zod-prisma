@@ -11,7 +11,7 @@ function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'defau
 
 var path__default = /*#__PURE__*/_interopDefaultLegacy(path);
 
-var version = "0.5.10";
+var version = "0.5.11";
 
 const configBoolean = /*#__PURE__*/zod.z.enum(['true', 'false']).transform(arg => JSON.parse(arg));
 const configSchema = /*#__PURE__*/zod.z.object({
@@ -98,10 +98,10 @@ const getZodConstructor = (field, getRelatedModelName = name => name.toString())
         zodType = 'z.preprocess((arg) => typeof arg === "string" || arg instanceof Date ? new Date(arg) : arg, z.date())';
         break;
       case 'Float':
-        zodType = 'z.number()';
+        zodType = 'z.preprocess((arg) => typeof arg === "string" ? +arg : arg, z.number())';
         break;
       case 'Decimal':
-        zodType = 'z.number()';
+        zodType = 'z.preprocess((arg) => typeof arg === "string" ? +arg : arg, z.number())';
         break;
       case 'Json':
         zodType = 'z.record(z.any())';

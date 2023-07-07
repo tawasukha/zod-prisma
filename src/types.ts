@@ -27,10 +27,12 @@ export const getZodConstructor = (
 					'z.preprocess((arg) => typeof arg === "string" || arg instanceof Date ? new Date(arg) : arg, z.date())'
 				break
 			case 'Float':
-				zodType = 'z.number()'
+				zodType =
+					'z.preprocess((arg) => typeof arg === "string" ? +arg : arg, z.number())'
 				break
 			case 'Decimal':
-				zodType = 'z.number()'
+				zodType =
+					'z.preprocess((arg) => typeof arg === "string" ? +arg : arg, z.number())'
 				break
 			case 'Json':
 				zodType = 'z.record(z.any())'
