@@ -1,6 +1,6 @@
 {
 	"name": "@tawasukha/zod-prisma",
-	"version": "0.5.11",
+	"version": "0.5.15",
 	"description": "Forked Version Prisma generator that creates Zod schemas for all of your models",
 	"license": "MIT",
 	"contributors": [
@@ -53,6 +53,9 @@
 	"jest": {
 		"testEnvironment": "node"
 	},
+	"peerDependencies": {
+		"zod": "^3.2.0"
+	},
 	"dependencies": {
 		"@prisma/generator-helper": "^4.6.1",
 		"parenthesis": "^3.1.8",
@@ -72,7 +75,7 @@
 		"prisma": "^4.6.1",
 		"tslib": "^2.4.0",
 		"typescript": "^4.5.5",
-		"zod": "^3.18.0"
+		"zod": "^3.22.2"
 	},
 	"engines": {
 		"node": ">=16"

@@ -12,7 +12,7 @@ export const getZodConstructor = (
 			case 'String':
 				zodType = 'z.string()'
 				if (field.isRequired) {
-					extraModifiers.push('min(1)')
+					extraModifiers.push('min(1, { message: "Required." })')
 				}
 				break
 			case 'Int':
@@ -23,8 +23,7 @@ export const getZodConstructor = (
 				zodType = 'z.bigint()'
 				break
 			case 'DateTime':
-				zodType =
-					'z.preprocess((arg) => typeof arg === "string" || arg instanceof Date ? new Date(arg) : arg, z.date())'
+				zodType = 'z.coerce.date()'
 				break
 			case 'Float':
 				zodType =

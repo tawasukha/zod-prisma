@@ -11,7 +11,7 @@ function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'defau
 
 var path__default = /*#__PURE__*/_interopDefaultLegacy(path);
 
-var version = "0.5.11";
+var version = "0.5.15";
 
 const configBoolean = /*#__PURE__*/zod.z.enum(['true', 'false']).transform(arg => JSON.parse(arg));
 const configSchema = /*#__PURE__*/zod.z.object({
@@ -84,7 +84,7 @@ const getZodConstructor = (field, getRelatedModelName = name => name.toString())
       case 'String':
         zodType = 'z.string()';
         if (field.isRequired) {
-          extraModifiers.push('min(1)');
+          extraModifiers.push('min(1, { message: "Required." })');
         }
         break;
       case 'Int':
@@ -95,7 +95,7 @@ const getZodConstructor = (field, getRelatedModelName = name => name.toString())
         zodType = 'z.bigint()';
         break;
       case 'DateTime':
-        zodType = 'z.preprocess((arg) => typeof arg === "string" || arg instanceof Date ? new Date(arg) : arg, z.date())';
+        zodType = 'z.coerce.date()';
         break;
       case 'Float':
         zodType = 'z.preprocess((arg) => typeof arg === "string" ? +arg : arg, z.number())';

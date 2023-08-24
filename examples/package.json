@@ -13,7 +13,7 @@
   "dependencies": {
     "@prisma/client": "^4.6.1",
     "@types/node": "^18.11.9",
-    "zod": "^3.18.0"
+    "zod": "^3.22.2"
   },
   "engines": {
     "node": ">=14"
