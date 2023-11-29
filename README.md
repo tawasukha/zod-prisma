@@ -1,3 +1,5 @@
+# [DEPRECATED]
+Deprecated, please use [zod-prisma-types](https://github.com/chrishoermann/zod-prisma-types) instead
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
